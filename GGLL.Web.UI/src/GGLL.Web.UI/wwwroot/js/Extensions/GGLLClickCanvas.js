@@ -2,10 +2,9 @@
 
     NAME: "GGLLClickCanvas",
 
-    init: function (graph, callBack) {
+    init: function (callBack) {
         this._super();
         this.callBack = callBack;
-        this.graph = graph;
     },
 
     onInstall: function (canvas) {
@@ -15,7 +14,7 @@
     },
 
     onMouseDown: function (canvas, x, y, shiftKey, ctrlKey) {
-        this.callBack(this.graph, x, y);
+        this.callBack(x, y);
     },
 
     onMouseMove: function (canvas, x, y) {

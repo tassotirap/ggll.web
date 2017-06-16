@@ -1,5 +1,6 @@
 ﻿import { Node } from "./node";
 import { OutputPort } from "../connections/output-port";
+import { NodeType } from "./node-factory";
 
 declare var draw2d: any;
 
@@ -7,18 +8,17 @@ export class Start extends Node {
 
     private start: any;
 
-    private text: string;
+    private label: any;
 
     constructor() {
         super();
-
-        this.text = "S";
+        
         this.start = new draw2d.shape.basic.Diamond({
             bgColor: "#FFA500",
             width: 50,
             height: 40,
             y: 10
-        });
+        });        
 
         this.node = this.start;
 
@@ -26,13 +26,17 @@ export class Start extends Node {
         this.addLabel();
     }
 
+    public getType(): NodeType {
+        return NodeType.Start;
+    }
+
     private addLabel() {
 
-        var label = new draw2d.shape.basic.Label({ text: this.text });
-        label.setStroke(0);
-        label.setBold(true);
+        this.label = new draw2d.shape.basic.Label({ text: "S" });
+        this.label.setStroke(0);
+        this.label.setBold(true);
 
-        label.installEditor(new draw2d.ui.LabelInplaceEditor({
+        this.label.installEditor(new draw2d.ui.LabelInplaceEditor({
             onCommit: function (value) {
                 this.text = value;
             },
@@ -40,7 +44,7 @@ export class Start extends Node {
             }
         }));
 
-        this.start.add(label, new draw2d.layout.locator.CenterLocator());
+        this.start.add(this.label, new draw2d.layout.locator.CenterLocator());
     }
 
     private addPort() {
@@ -49,5 +53,13 @@ export class Start extends Node {
         var outPutPort = new OutputPort();
 
         this.start.addPort(outPutPort.getPort(), outputLocator);
+    }
+
+    public setText(text: any) {
+        this.label.setText(text);
+    }
+
+    public getText(): any {
+        return this.label.getText();
     }
 }

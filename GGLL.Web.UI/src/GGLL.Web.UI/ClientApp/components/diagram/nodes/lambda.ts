@@ -1,4 +1,5 @@
 ﻿import { Node } from "./node";
+import { NodeType } from "./node-factory";
 
 declare var draw2d: any;
 
@@ -6,17 +7,16 @@ export class Lambda extends Node {
 
     private lambda: any;
 
-    private text: string;
+    private label: any;
 
     constructor() {
         super();
 
-        this.text = "Y";
         this.lambda = new draw2d.shape.basic.Circle({
             bgColor: "ffff00",
             width: 40,
             height: 40
-        });
+        });       
 
         this.node = this.lambda;
 
@@ -24,20 +24,29 @@ export class Lambda extends Node {
         this.addLabel();
     }
 
+    public getType(): NodeType {
+        return NodeType.Lambda;
+    }
+
     private addPorts() {
         var inputLocator = new draw2d.layout.locator.LeftLocator();
-        var inputPort = new draw2d.InputPort();  
+        var inputPort = new draw2d.InputPort();
 
         this.lambda.addPort(inputPort, inputLocator);
     }
 
     private addLabel() {
 
-        var label = new draw2d.shape.basic.Label({ text: this.text });
-        label.setBold(true);
-        label.setStroke(0);
-        this.lambda.add(label, new draw2d.layout.locator.CenterLocator());
+        this.label = new draw2d.shape.basic.Label({ text: "λ" });
+        this.label.setBold(true);
+        this.label.setStroke(0);
+        this.lambda.add(this.label, new draw2d.layout.locator.CenterLocator());
     }
 
+    public setText(text: any) {
+    }
 
+    public getText(): any {
+        return this.label.getText();
+    }
 }

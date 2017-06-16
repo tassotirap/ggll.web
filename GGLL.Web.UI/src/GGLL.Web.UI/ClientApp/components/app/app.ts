@@ -7,11 +7,10 @@ export class App {
     public router: Router;
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Aurelia';
+        config.title = 'GGLL - Web';
         config.map([
             { route: ['', 'welcome'], name: 'welcome', moduleId: PLATFORM.moduleName('../welcome/welcome'), nav: true, title: 'Welcome' },
-            { route: 'users', name: 'users', moduleId: PLATFORM.moduleName('../users/users'), nav: true, title: 'Github Users' },
-            { route: 'child-router', name: 'child-router', moduleId: PLATFORM.moduleName('../child-router/child-router'), nav: true, title: 'Child Router' }
+            { route: 'ggll', name: 'ggll', moduleId: PLATFORM.moduleName('../ggll/ggll'), nav: true, title: 'Editor' }
         ]);
 
         this.router = router;

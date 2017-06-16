@@ -21,6 +21,18 @@ export class NodeFactory {
         }
         return null;
     }
+
+    public static CreateFromOject(object: any): Node {
+        var type = NodeType[String(object.type)];
+        var node = NodeFactory.Create(type);
+        node.Height = object.height;
+        node.Width = object.width;
+        node.X = object.x;
+        node.Y = object.y;
+        node.Id = object.id;
+        node.setText(object.text);
+        return node;
+    }
 }
 
 

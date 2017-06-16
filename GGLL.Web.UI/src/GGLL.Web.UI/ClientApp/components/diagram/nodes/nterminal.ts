@@ -1,6 +1,7 @@
 ﻿import { Node } from "./node";
 import { OutputPort } from "../connections/output-port";
 import { OutputAlternativePort } from "../connections/output-alternative-port";
+import { NodeType } from "./node-factory";
 
 declare var draw2d: any;
 
@@ -8,12 +9,11 @@ export class NTerminal extends Node {
 
     private nterminal: any;
 
-    private text: string;
+    private label: any;
 
     constructor() {
         super();
-
-        this.text = "NTerminal";
+        
         this.nterminal = new draw2d.shape.basic.Rectangle({
             bgColor: "#98FB98",
             width: 70,
@@ -24,6 +24,10 @@ export class NTerminal extends Node {
 
         this.addPorts();
         this.addLabel();
+    }
+
+    public getType(): NodeType {
+        return NodeType.NTerminal;
     }
 
     private addPorts() {
@@ -41,11 +45,11 @@ export class NTerminal extends Node {
 
     private addLabel() {
 
-        var label = new draw2d.shape.basic.Label({ text: this.text });
-        label.setStroke(0);
-        label.setBold(true);
+        this.label = new draw2d.shape.basic.Label({ text: "NTerminal" });
+        this.label.setStroke(0);
+        this.label.setBold(true);
 
-        label.installEditor(new draw2d.ui.LabelInplaceEditor({
+        this.label.installEditor(new draw2d.ui.LabelInplaceEditor({
             onCommit: function (value) {
                 this.text = value;
             },
@@ -53,7 +57,15 @@ export class NTerminal extends Node {
             }
         }));
 
-        this.nterminal.add(label, new draw2d.layout.locator.CenterLocator());
+        this.nterminal.add(this.label, new draw2d.layout.locator.CenterLocator());
+    }
+
+    public setText(text: any) {
+        this.label.setText(text);
+    }
+
+    public getText(): any {
+        return this.label.getText();
     }
 
 
