@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b79b6f026bdb5548c100"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b66edc1fe1781f0859ef"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -19700,6 +19700,7 @@ var Canvas = (function () {
     }
     Canvas.prototype.Create = function () {
         this.canvas = new draw2d.Canvas(this.id);
+        this.canvas.setScrollArea("#" + this.id);
     };
     Canvas.prototype.add = function (node, posX, posY) {
         if (posX === void 0) { posX = null; }

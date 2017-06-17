@@ -31,6 +31,7 @@ export class Canvas {
 
     private Create() {
         this.canvas = new draw2d.Canvas(this.id);
+        this.canvas.setScrollArea("#" + this.id);
     }
 
     public add(node: Node, posX: number = null, posY: number = null) {
@@ -54,7 +55,7 @@ export class Canvas {
         this.canvas.uninstallEditPolicy(policyName);
     }
 
-    public registerRemoveCallback(callback : any) {
+    public registerRemoveCallback(callback: any) {
         this.canvas.on("figure:remove", function (emitter, event) {
             callback(emitter, event);
         });
@@ -82,8 +83,7 @@ export class Canvas {
         return objects;
     }
 
-    public reset()
-    {
+    public reset() {
         this.canvas.clear();
     }
 }
